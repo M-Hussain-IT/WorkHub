@@ -5,8 +5,17 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 function Home() {
+  const { user, loading, isAuthenticated } = useAuth();
+
+  console.log("Auth State:", {
+    user,
+    loading,
+    isAuthenticated,
+  });
+
   return (
     <main className="min-h-screen bg-slate-950 text-white">
       <section className="mx-auto max-w-7xl px-6 py-24">

@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -14,11 +15,16 @@ function App() {
       <Navbar />
 
       <Routes>
+        {/* Public routes */}
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/profile/edit" element={<EditProfile />} />
+
+        {/* Protected routes */}
+        <Route element={<ProtectedRoute />}>
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/edit" element={<EditProfile />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
