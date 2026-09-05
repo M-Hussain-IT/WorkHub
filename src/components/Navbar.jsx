@@ -5,6 +5,8 @@ import {
   UserPlus,
   UserCircle,
   LogOut,
+  FolderOpen,
+  LayoutDashboard,
 } from "lucide-react";
 
 import { useAuth } from "../context/AuthContext";
@@ -22,14 +24,19 @@ function Navbar() {
     <nav className="border-b border-slate-800 bg-slate-950">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
 
+        {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
-          <BriefcaseBusiness className="text-blue-500" size={26} />
+          <BriefcaseBusiness
+            className="text-blue-500"
+            size={26}
+          />
 
           <span className="text-2xl font-bold text-white">
             Work<span className="text-blue-500">Hub</span>
           </span>
         </Link>
 
+        {/* Navigation */}
         <div className="flex items-center gap-3">
 
           {loading ? (
@@ -38,6 +45,25 @@ function Navbar() {
             </span>
           ) : user ? (
             <>
+              {/* All Projects */}
+              <Link
+                to="/projects"
+                className="flex items-center gap-2 rounded-lg px-4 py-2 text-slate-300 hover:bg-slate-800 hover:text-white"
+              >
+                <FolderOpen size={18} />
+                Projects
+              </Link>
+
+              {/* My Projects */}
+              <Link
+                to="/my-projects"
+                className="flex items-center gap-2 rounded-lg px-4 py-2 text-slate-300 hover:bg-slate-800 hover:text-white"
+              >
+                <LayoutDashboard size={18} />
+                My Projects
+              </Link>
+
+              {/* Profile */}
               <Link
                 to="/profile"
                 className="flex items-center gap-2 rounded-lg px-4 py-2 text-slate-300 hover:bg-slate-800 hover:text-white"
@@ -46,6 +72,7 @@ function Navbar() {
                 {user.name}
               </Link>
 
+              {/* Logout */}
               <button
                 onClick={handleLogout}
                 className="flex items-center gap-2 rounded-lg border border-slate-700 px-4 py-2 text-slate-300 hover:bg-slate-800 hover:text-white"
@@ -56,6 +83,7 @@ function Navbar() {
             </>
           ) : (
             <>
+              {/* Login */}
               <Link
                 to="/login"
                 className="flex items-center gap-2 rounded-lg px-4 py-2 text-slate-300 hover:bg-slate-800 hover:text-white"
@@ -64,6 +92,7 @@ function Navbar() {
                 Login
               </Link>
 
+              {/* Register */}
               <Link
                 to="/register"
                 className="flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 font-medium text-white hover:bg-blue-700"
