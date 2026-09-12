@@ -45,6 +45,15 @@ function Navbar() {
             </span>
           ) : user ? (
             <>
+
+
+            <Link
+              to="/dashboard"
+              className="flex items-center gap-2 rounded-lg px-4 py-2 text-slate-300 hover:bg-slate-800 hover:text-white"
+            >
+              <LayoutDashboard size={18} />
+              Dashboard
+            </Link>
               {/* All Projects */}
               <Link
                 to="/projects"
@@ -54,6 +63,8 @@ function Navbar() {
                 Projects
               </Link>
 
+
+
               {/* My Projects */}
               <Link
                 to="/my-projects"
@@ -62,6 +73,15 @@ function Navbar() {
                 <LayoutDashboard size={18} />
                 My Projects
               </Link>
+
+              {user?.role === "freelancer" && (
+                <Link
+                  to="/proposals"
+                  className="hidden items-center gap-2 rounded-lg px-3 py-2 text-slate-300 hover:bg-slate-800 hover:text-white sm:flex"
+                >
+                  My Proposals
+                </Link>
+              )}
 
               {/* Profile */}
               <Link

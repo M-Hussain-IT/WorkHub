@@ -1,8 +1,8 @@
 # WorkHub – Freelancing Marketplace
 
-WorkHub is a MERN-stack freelancing marketplace developed as part of the Zynvex Solutions MERN Stack Web Development Internship.
+WorkHub is a MERN-stack freelancing marketplace developed as part of the **Zynvex Solutions MERN Stack Web Development Internship**.
 
-The platform connects clients and freelancers and provides authentication, user profiles, project management, and project discovery features.
+The platform connects clients and freelancers and provides authentication, user profiles, project management, project discovery, and proposal management features.
 
 ## Tech Stack
 
@@ -61,11 +61,37 @@ The platform connects clients and freelancers and provides authentication, user 
 * Clear filters
 * Responsive project management interface
 
+### Module 3 – Proposals & Bidding
+
+* Freelancer proposal submission
+* Create proposals
+* Proposal validation
+* Project-specific proposals
+* Freelancer authorization
+* Prevent duplicate proposals
+* View proposals for a project
+* View freelancer's own proposals
+* Proposal cards
+* Proposal dashboard
+* Bid amount
+* Cover letter
+* Estimated delivery time
+* Proposal status
+* Client proposal management
+* Accept and reject proposals
+* Protected proposal routes
+* Role-based proposal access
+* Responsive proposal interface
+
 ## Main Features
 
 * Secure authentication
 * Role-based access control
 * Client project management
+* Freelancer proposal submission
+* Project bidding
+* Client proposal management
+* Proposal status tracking
 * Project discovery
 * Project search
 * Project filtering
@@ -119,3 +145,8 @@ The frontend and backend should be configured with the required environment vari
 **Organization:** Zynvex Solutions
 **Program:** MERN Stack Web Development Internship
 **Project:** WorkHub – Freelancing Marketplace
+
+```
+
+**Important:** I included the Module 3 proposal features based on the WorkHub functionality you've been building. If your Module 3 assignment has a specific official feature list, send me that list and I'll make the README match the assignment exactly.
+```

@@ -14,6 +14,11 @@ import CreateProject from "./pages/CreateProject";
 import ProjectDetails from "./pages/ProjectDetails";
 import EditProject from "./pages/EditProject";
 import MyProjects from "./pages/MyProjects";
+import SubmitProposal from "./pages/SubmitProposal";
+import MyProposals from "./pages/MyProposals";
+import ProjectProposals from "./pages/ProjectProposals";
+import Dashboard from "./pages/Dashboard";
+
 
 function App() {
   return (
@@ -52,6 +57,22 @@ function App() {
             path="/my-projects"
             element={<MyProjects />}
           />
+          <Route
+            path="/projects/:id/proposal"
+            element={<SubmitProposal />}
+          />
+         <Route
+            path="/proposals"
+            element={<MyProposals />}
+          />
+          <Route
+            path="/projects/:projectId/proposals"
+            element={<ProjectProposals />}
+          />
+          <Route
+          path="/dashboard"
+          element={<Dashboard />}
+        />
         </Route>
       </Routes>
     </BrowserRouter>

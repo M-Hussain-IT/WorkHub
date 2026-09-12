@@ -9,6 +9,8 @@ import {
   LoaderCircle,
   Pencil,
   Trash2,
+  Send,
+  FileText,
 } from "lucide-react";
 
 import api from "../services/api";
@@ -69,7 +71,6 @@ function ProjectDetails() {
 
       if (response.data.success) {
         alert("Project deleted successfully.");
-
         navigate("/projects");
       }
     } catch (error) {
@@ -102,7 +103,6 @@ function ProjectDetails() {
     return (
       <main className="min-h-screen bg-slate-950 px-6 py-12 text-white">
         <div className="mx-auto max-w-4xl">
-
           <div className="rounded-xl border border-red-500/20 bg-red-500/10 p-5 text-red-400">
             {error}
           </div>
@@ -114,38 +114,31 @@ function ProjectDetails() {
             <ArrowLeft size={17} />
             Back to Projects
           </Link>
-
         </div>
       </main>
     );
   }
 
   if (!project) {
-    return (
-      <main className="min-h-screen bg-slate-950 px-6 py-12 text-white">
-        <div className="mx-auto max-w-4xl">
-
-          <p className="text-slate-400">
-            Project not found.
-          </p>
-
-          <Link
-            to="/projects"
-            className="mt-6 inline-flex items-center gap-2 text-sm text-slate-400 transition hover:text-white"
-          >
-            <ArrowLeft size={17} />
-            Back to Projects
-          </Link>
-
-        </div>
-      </main>
-    );
+    return null;
   }
 
+  const currentUserId = user?._id || user?.id;
+  const projectClientId =
+    project.client?._id || project.client?.id || project.client;
+
   const isOwner =
-    user?._id &&
-    project.client?._id &&
-    user._id === project.client._id;
+    user?.role === "client" &&
+    currentUserId &&
+    projectClientId &&
+    currentUserId.toString() === projectClientId.toString();
+
+  const isFreelancer =
+    user?.role === "freelancer";
+
+  const canSubmitProposal =
+    isFreelancer &&
+    project.status === "open";
 
   return (
     <main className="min-h-screen bg-slate-950 px-6 py-12 text-white">
@@ -182,7 +175,13 @@ function ProjectDetails() {
               </span>
 
               {/* Status */}
-              <span className="rounded-full bg-green-500/10 px-3 py-1 text-sm capitalize text-green-400">
+              <span
+                className={`rounded-full px-3 py-1 text-sm capitalize ${
+                  project.status === "open"
+                    ? "bg-green-500/10 text-green-400"
+                    : "bg-slate-500/10 text-slate-400"
+                }`}
+              >
                 {project.status}
               </span>
 
@@ -193,11 +192,10 @@ function ProjectDetails() {
               {project.title}
             </h1>
 
-            {/* Owner Actions */}
+            {/* Client Actions */}
             {isOwner && (
               <div className="mt-6 flex flex-wrap gap-3">
 
-                {/* Edit */}
                 <Link
                   to={`/projects/${project._id}/edit`}
                   className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-3 font-medium text-white transition hover:bg-blue-500"
@@ -206,7 +204,14 @@ function ProjectDetails() {
                   Edit Project
                 </Link>
 
-                {/* Delete */}
+                <Link
+                  to={`/projects/${project._id}/proposals`}
+                  className="inline-flex items-center gap-2 rounded-xl border border-slate-700 px-5 py-3 font-medium text-slate-200 transition hover:bg-slate-800"
+                >
+                  <FileText size={18} />
+                  View Proposals
+                </Link>
+
                 <button
                   type="button"
                   onClick={handleDelete}
@@ -228,6 +233,21 @@ function ProjectDetails() {
                     </>
                   )}
                 </button>
+
+              </div>
+            )}
+
+            {/* Freelancer Action */}
+            {canSubmitProposal && (
+              <div className="mt-6 border-t border-slate-800 pt-6">
+
+                <Link
+                  to={`/projects/${project._id}/proposal`}
+                  className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white transition hover:bg-blue-700"
+                >
+                  <Send size={18} />
+                  Submit Proposal
+                </Link>
 
               </div>
             )}
@@ -278,7 +298,6 @@ function ProjectDetails() {
               />
 
             </div>
-
           </div>
 
           {/* Client Information */}
